@@ -1,0 +1,16 @@
+{
+  "name": "hapiTest",
+  "version": "1.0.0",
+  "description": "test hapi project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "good": "^5.1.1",
+    "good-console": "^4.1.0",
+    "hapi": "^8.2.0"
+  }
+}
