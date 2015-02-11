@@ -1,3 +1,7 @@
+// https://coderwall.com/p/-h1h1w/how-to-use-jslint-in-node-js-projects-properly
+/* jslint node: true */
+"use strict";
+
 /*
  * Server configuration can be found at:
  *  http://hapijs.com/api
@@ -12,6 +16,7 @@
 
 var Hapi = require('hapi');
 var Good = require('good');
+var Util = require('util');
 
 // Create a server with a host and port
 var server = new Hapi.Server();
@@ -22,10 +27,10 @@ server.route({
   method: 'GET',
   path:'/',
   handler: function (request, reply) {
-    // http://hapijs.com/api#request-properties
-    console.log(request.headers);
+    // http://hapijs.com/api#request-properties    
+    console.log(Util.inspect(request, {colors: true, depth: 1}));
 
-    reply('hello world');
+    reply('hi u');
   }
 });
 
