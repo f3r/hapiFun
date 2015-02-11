@@ -1,3 +1,15 @@
+/*
+ * Server configuration can be found at:
+ *  http://hapijs.com/api
+ *
+ * http://nodemon.io
+ *   Nodemon is a utility that will monitor for any changes in your source
+ *   and automatically restart your server
+ *
+ *     $ npm install -g nodemon
+ *     $ nodemon server.js
+ */
+
 var Hapi = require('hapi');
 var Good = require('good');
 
@@ -5,21 +17,33 @@ var Good = require('good');
 var server = new Hapi.Server();
 server.connection({port: 3000 });
 
-// Add the route
+// http://hapijs.com/tutorials/routing
 server.route({
   method: 'GET',
   path:'/',
   handler: function (request, reply) {
+    // http://hapijs.com/api#request-properties
+    console.log(request.headers);
+
     reply('hello world');
   }
 });
 
-// Adding a second route
 server.route({
+  // GET | POST | PUT | PATCH | DELETE etc
   method: 'GET',
-  path: '/{name}',
+  
+  // named parameters, max one per segments
+  // Can access params with (request.params)
+  // can have optional 'hi/{optional?}', 
+  // Can have multiple segments 
+  // - /hi/{user*2} will match ==> /hi/fer/martin
+  // - /hi/{user*}  will match ==> /hi/a/b/c/d/e (only last route param)
+  path: '/hi/{name}', 
+  
+  // http://hapijs.com/api#request-properties
   handler: function (request, reply) {
-    reply('Hello, ' + encodeURIComponent(request.params.name) + '!');
+    reply('Waddup, ' + encodeURIComponent(request.params.name) + '!');
   }
 });
 
