@@ -14,6 +14,10 @@
  *     $ nodemon server.js
  */
 
+// https://github.com/wycats/handlebars.js/
+// npm install --save handlebars
+var Handlebars  = require('handlebars');
+var Path = require('path');
 var Hapi = require('hapi');
 var Good = require('good');
 var Util = require('util');
@@ -21,6 +25,19 @@ var Util = require('util');
 // Create a server with a host and port
 var server = new Hapi.Server();
 server.connection({port: 3000 });
+
+// Configure templating engine
+server.views({
+  engines: {
+    // register handlebars module for .html templates
+    html: Handlebars.create()
+  },
+  path: './views',
+  layout: true,
+  layoutPath:   './views/layouts',
+  partialsPath: './views/partials',
+  helpersPath:  './views/helpers',
+});
 
 // http://hapijs.com/tutorials/routing
 server.route({
@@ -30,7 +47,7 @@ server.route({
     // http://hapijs.com/api#request-properties    
     console.log(Util.inspect(request, {colors: true, depth: 1}));
 
-    reply('hi u');
+    reply.view('index', {body: "yeah"});
   }
 });
 
