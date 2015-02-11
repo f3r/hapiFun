@@ -27,6 +27,7 @@ var server = new Hapi.Server();
 server.connection({port: 3000 });
 
 // Configure templating engine
+// http://hapijs.com/tutorials/views
 server.views({
   engines: {
     // register handlebars module for .html templates
